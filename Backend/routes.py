@@ -77,19 +77,12 @@ def register_routes(app):
         system = get_system_information()
 
         return render_template(
-
             "index.html",
-
             hostname=system["hostname"],
-
             current_time=system["time"],
-
             branch=get_current_branch(),
-
             commit=get_latest_commit(),
-
             username=current_user.id,
-
         )
 
     # ==========================================
@@ -103,35 +96,20 @@ def register_routes(app):
         system = get_system_information()
 
         return render_template(
-
             "status.html",
-
             cpu=system["cpu"],
-
             memory=system["memory"],
-
             disk=system["disk"],
-
             hostname=system["hostname"],
-
             os=system["os"],
-
             release=system["release"],
-
             ip=system["ip"],
-
             current_time=system["time"],
-
             cores=system["cores"],
-
             sent=system["sent"],
-
             received=system["received"],
-
             uptime=system["uptime"],
-
             processes=system["processes"],
-
         )
 
     # ==========================================
@@ -145,19 +123,12 @@ def register_routes(app):
         message = deploy_application()
 
         return render_template(
-
             "deploy.html",
-
             message=message,
-
             server=config.SERVER_NAME,
-
             ip=config.SERVER_IP,
-
             env=config.ENVIRONMENT,
-
             version=config.APP_VERSION,
-
         )
 
     # ==========================================
@@ -169,11 +140,8 @@ def register_routes(app):
     def logs():
 
         return render_template(
-
             "log.html",
-
             logs=read_logs(),
-
         )
 
     # ==========================================
@@ -187,11 +155,8 @@ def register_routes(app):
         docker = get_docker_information()
 
         return render_template(
-
             "docker.html",
-
             docker=docker,
-
         )
 
     # ==========================================
@@ -241,3 +206,16 @@ def register_routes(app):
         remove_container(name)
 
         return redirect("/docker")
+
+    # ==========================================
+    # HEALTH CHECK
+    # ==========================================
+
+    @app.route("/health")
+    def health():
+
+        return {
+            "status": "UP",
+            "application": "DevOps Control Center",
+            "version": "1.0.0"
+        }

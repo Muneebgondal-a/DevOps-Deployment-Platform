@@ -4,73 +4,127 @@
 
 <head>
 
-<title>DevOps Control Center</title>
+    <title>DevOps Control Center</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
 <body>
 
-<div class="sidebar">
+    <div class="sidebar">
 
-<h2>🚀 DevOps</h2>
+        <h2>🚀 DevOps</h2>
 
-<a href="/">Dashboard</a>
+        <a href="/">🏠 Dashboard</a>
 
-<a href="/status">Server Status</a>
+        <a href="/status">🖥 Server Status</a>
 
-<a href="/deploy">Deploy</a>
+        <a href="/deploy">🚀 Deploy</a>
 
-<a href="/logs">Logs</a>
+        <a href="/logs">📄 Logs</a>
 
-<a href="/docker">Docker</a>
+        <a href="/docker">🐳 Docker</a>
 
-</div>
+        <a href="/health" target="_blank">❤️ Health API</a>
 
-<div class="main">
+        <a href="/logout">🚪 Logout</a>
 
-<h1>DevOps Control Center</h1>
+    </div>
 
-<br>
+    <div class="main">
 
-<div class="cards">
+        <h1>🚀 DevOps Control Center</h1>
 
-<div class="card">
+        <p>Welcome <b>{{ username }}</b></p>
 
-<h3>Hostname</h3>
+        <br>
 
-<p>{{ hostname }}</p>
+        <div class="cards">
 
-</div>
+            <div class="card">
 
-<div class="card">
+                <h3>🖥 Hostname</h3>
 
-<h3>Current Time</h3>
+                <p>{{ hostname }}</p>
 
-<p>{{ current_time }}</p>
+            </div>
 
-</div>
+            <div class="card">
 
-<div class="card">
+                <h3>🕒 Current Time</h3>
 
-<h3>Git Branch</h3>
+                <p>{{ current_time }}</p>
 
-<p>{{ branch }}</p>
+            </div>
 
-</div>
+            <div class="card">
 
-<div class="card">
+                <h3>🌿 Git Branch</h3>
 
-<h3>Latest Commit</h3>
+                <p>{{ branch }}</p>
 
-<p>{{ commit }}</p>
+            </div>
 
-</div>
+            <div class="card">
 
-</div>
+                <h3>📌 Latest Commit</h3>
 
-</div>
+                <p>{{ commit }}</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>🐳 Docker</h3>
+
+                <p>Manage Docker Containers</p>
+
+                <a href="/docker">
+                    <button class="btn">Open</button>
+                </a>
+
+            </div>
+
+            <div class="card">
+
+                <h3>🖥 Server Status</h3>
+
+                <p>Monitor CPU, RAM and Disk</p>
+
+                <a href="/status">
+                    <button class="btn">Open</button>
+                </a>
+
+            </div>
+
+            <div class="card">
+
+                <h3>🚀 Deploy</h3>
+
+                <p>Run Deployment</p>
+
+                <a href="/deploy">
+                    <button class="btn">Open</button>
+                </a>
+
+            </div>
+
+            <div class="card">
+
+                <h3>❤️ Health Check</h3>
+
+                <p>Verify Application Status</p>
+
+                <a href="/health" target="_blank">
+                    <button class="btn">Check</button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
 
