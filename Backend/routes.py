@@ -1,6 +1,9 @@
-from flask import render_template, redirect
+from flask import render_template, redirect, request, url_for
+from flask_login import login_user, logout_user, login_required, current_user
 
 import config
+
+from auth import User, validate_user
 
 from services.monitoring import get_system_information
 from services.deployment import deploy_application
@@ -22,10 +25,53 @@ from services.docker_service import (
 def register_routes(app):
 
     # ==========================================
+    # LOGIN
+    # ==========================================
+
+    @app.route("/login", methods=["GET", "POST"])
+    def login():
+
+        if current_user.is_authenticated:
+            return redirect(url_for("home"))
+
+        if request.method == "POST":
+
+            username = request.form.get("username")
+            password = request.form.get("password")
+
+            if validate_user(username, password):
+
+                user = User(username)
+
+                login_user(user)
+
+                return redirect(url_for("home"))
+
+            return render_template(
+                "login.html",
+                error="Invalid Username or Password"
+            )
+
+        return render_template("login.html")
+
+    # ==========================================
+    # LOGOUT
+    # ==========================================
+
+    @app.route("/logout")
+    @login_required
+    def logout():
+
+        logout_user()
+
+        return redirect(url_for("login"))
+
+    # ==========================================
     # HOME
     # ==========================================
 
     @app.route("/")
+    @login_required
     def home():
 
         system = get_system_information()
@@ -42,6 +88,8 @@ def register_routes(app):
 
             commit=get_latest_commit(),
 
+            username=current_user.id,
+
         )
 
     # ==========================================
@@ -49,6 +97,7 @@ def register_routes(app):
     # ==========================================
 
     @app.route("/status")
+    @login_required
     def status():
 
         system = get_system_information()
@@ -90,6 +139,7 @@ def register_routes(app):
     # ==========================================
 
     @app.route("/deploy")
+    @login_required
     def deploy():
 
         message = deploy_application()
@@ -115,6 +165,7 @@ def register_routes(app):
     # ==========================================
 
     @app.route("/logs")
+    @login_required
     def logs():
 
         return render_template(
@@ -130,6 +181,7 @@ def register_routes(app):
     # ==========================================
 
     @app.route("/docker")
+    @login_required
     def docker():
 
         docker = get_docker_information()
@@ -147,6 +199,7 @@ def register_routes(app):
     # ==========================================
 
     @app.route("/docker/start/<name>")
+    @login_required
     def docker_start(name):
 
         start_container(name)
@@ -158,6 +211,7 @@ def register_routes(app):
     # ==========================================
 
     @app.route("/docker/stop/<name>")
+    @login_required
     def docker_stop(name):
 
         stop_container(name)
@@ -169,6 +223,7 @@ def register_routes(app):
     # ==========================================
 
     @app.route("/docker/restart/<name>")
+    @login_required
     def docker_restart(name):
 
         restart_container(name)
@@ -180,6 +235,7 @@ def register_routes(app):
     # ==========================================
 
     @app.route("/docker/remove/<name>")
+    @login_required
     def docker_remove(name):
 
         remove_container(name)
