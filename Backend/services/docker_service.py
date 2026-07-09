@@ -6,22 +6,17 @@ def run_command(command):
     try:
 
         output = subprocess.check_output(
-
             command,
-
             shell=True,
-
             text=True,
-
-            stderr=subprocess.DEVNULL
-
+            stderr=subprocess.STDOUT
         )
 
         return output.strip()
 
-    except Exception:
+    except subprocess.CalledProcessError as error:
 
-        return None
+        return error.output.strip()
 
 
 def get_docker_information():
@@ -42,7 +37,7 @@ def get_docker_information():
 
     version = run_command("docker --version")
 
-    if version:
+    if "Docker version" in version:
 
         docker["installed"] = True
 
@@ -50,23 +45,21 @@ def get_docker_information():
 
     info = run_command("docker info")
 
-    if info:
+    if "Server Version" in info:
 
         docker["running"] = True
 
     if docker["running"]:
 
-        images = run_command(
-
+        image_output = run_command(
             'docker images --format "{{.Repository}}|{{.Tag}}|{{.Size}}"'
-
         )
 
-        if images:
+        if image_output:
 
-            for image in images.splitlines():
+            for line in image_output.splitlines():
 
-                parts = image.split("|")
+                parts = line.split("|")
 
                 if len(parts) == 3:
 
@@ -80,17 +73,15 @@ def get_docker_information():
 
                     })
 
-        containers = run_command(
-
+        container_output = run_command(
             'docker ps -a --format "{{.Names}}|{{.Status}}|{{.Image}}"'
-
         )
 
-        if containers:
+        if container_output:
 
-            for container in containers.splitlines():
+            for line in container_output.splitlines():
 
-                parts = container.split("|")
+                parts = line.split("|")
 
                 if len(parts) == 3:
 
@@ -105,3 +96,23 @@ def get_docker_information():
                     })
 
     return docker
+
+
+def start_container(name):
+
+    return run_command(f"docker start {name}")
+
+
+def stop_container(name):
+
+    return run_command(f"docker stop {name}")
+
+
+def restart_container(name):
+
+    return run_command(f"docker restart {name}")
+
+
+def remove_container(name):
+
+    return run_command(f"docker rm -f {name}")
