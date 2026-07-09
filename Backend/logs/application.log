@@ -1,0 +1,59 @@
+2026-07-08 22:18:25,582 | WARNING |  * Debugger is active!
+2026-07-08 22:18:25,586 | INFO |  * Debugger PIN: 589-604-019
+2026-07-08 22:25:12,479 | INFO |  * Detected change in 'C:\\Users\\LENOVO\\desktop\\DevOps-Deployment-Platform\\Backend\\routes.py', reloading
+2026-07-08 22:25:12,883 | WARNING |  * Debugger is active!
+2026-07-08 22:25:12,888 | INFO |  * Debugger PIN: 589-604-019
+2026-07-08 22:25:45,605 | INFO | 127.0.0.1 - - [08/Jul/2026 22:25:45] "GET / HTTP/1.1" 200 -
+2026-07-08 22:25:48,203 | INFO | 127.0.0.1 - - [08/Jul/2026 22:25:48] "[35m[1mGET /logs HTTP/1.1[0m" 500 -
+2026-07-08 22:25:48,376 | INFO | 127.0.0.1 - - [08/Jul/2026 22:25:48] "[36mGET /logs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-07-08 22:25:48,378 | INFO | 127.0.0.1 - - [08/Jul/2026 22:25:48] "[36mGET /logs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-07-08 22:25:48,407 | INFO | 127.0.0.1 - - [08/Jul/2026 22:25:48] "GET /logs?__debugger__=yes&cmd=resource&f=console.png&s=6PzzkP2kFn8gb2ttheIZ HTTP/1.1" 200 -
+2026-07-08 22:25:53,252 | INFO | 127.0.0.1 - - [08/Jul/2026 22:25:53] "GET /status HTTP/1.1" 200 -
+2026-07-08 22:40:04,353 | INFO | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-07-08 22:40:04,353 | INFO | [33mPress CTRL+C to quit[0m
+2026-07-08 22:40:04,354 | INFO |  * Restarting with stat
+2026-07-08 22:40:04,701 | WARNING |  * Debugger is active!
+2026-07-08 22:40:04,705 | INFO |  * Debugger PIN: 589-604-019
+2026-07-08 22:40:11,724 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:11] "GET / HTTP/1.1" 200 -
+2026-07-08 22:40:13,719 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:13] "[35m[1mGET /logs HTTP/1.1[0m" 500 -
+2026-07-08 22:40:13,891 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:13] "[36mGET /logs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-07-08 22:40:13,892 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:13] "[36mGET /logs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-07-08 22:40:13,914 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:13] "GET /logs?__debugger__=yes&cmd=resource&f=console.png&s=5aluJPva5TdaBc3kkX7y HTTP/1.1" 200 -
+2026-07-08 22:40:33,432 | INFO | Deployment Started
+2026-07-08 22:40:33,435 | INFO | Deployment Finished
+2026-07-08 22:40:33,438 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:33] "GET /deploy HTTP/1.1" 200 -
+2026-07-08 22:40:45,625 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:45] "GET / HTTP/1.1" 200 -
+2026-07-08 22:40:47,027 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:47] "[35m[1mGET /logs HTTP/1.1[0m" 500 -
+2026-07-08 22:40:47,039 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:47] "[36mGET /logs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-07-08 22:40:47,040 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:47] "[36mGET /logs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-07-08 22:40:47,050 | INFO | 127.0.0.1 - - [08/Jul/2026 22:40:47] "[36mGET /logs?__debugger__=yes&cmd=resource&f=console.png&s=5aluJPva5TdaBc3kkX7y HTTP/1.1[0m" 304 -
+2026-07-08 22:41:49,859 | INFO |  * Detected change in 'C:\\Users\\LENOVO\\desktop\\DevOps-Deployment-Platform\\Backend\\git_service.py', reloading
+2026-07-08 22:41:49,922 | INFO |  * Restarting with stat
+2026-07-08 22:41:50,292 | WARNING |  * Debugger is active!
+2026-07-08 22:41:50,296 | INFO |  * Debugger PIN: 589-604-019
+2026-07-08 22:43:23,264 | INFO |  * Detected change in 'C:\\Users\\LENOVO\\desktop\\DevOps-Deployment-Platform\\Backend\\routes.py', reloading
+2026-07-08 22:43:23,333 | INFO |  * Restarting with stat
+2026-07-08 22:43:23,675 | WARNING |  * Debugger is active!
+2026-07-08 22:43:23,679 | INFO |  * Debugger PIN: 589-604-019
+2026-07-08 22:49:45,777 | INFO |  * Detected change in 'C:\\Users\\LENOVO\\desktop\\DevOps-Deployment-Platform\\Backend\\routes.py', reloading
+2026-07-08 22:49:45,837 | INFO |  * Restarting with stat
+2026-07-08 22:49:46,193 | WARNING |  * Debugger is active!
+2026-07-08 22:49:46,197 | INFO |  * Debugger PIN: 589-604-019
+2026-07-08 22:51:26,435 | INFO | 127.0.0.1 - - [08/Jul/2026 22:51:26] "GET / HTTP/1.1" 200 -
+2026-07-08 22:51:43,260 | INFO | 127.0.0.1 - - [08/Jul/2026 22:51:43] "[35m[1mGET /logs HTTP/1.1[0m" 500 -
+2026-07-08 22:51:43,430 | INFO | 127.0.0.1 - - [08/Jul/2026 22:51:43] "[36mGET /logs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-07-08 22:51:43,434 | INFO | 127.0.0.1 - - [08/Jul/2026 22:51:43] "[36mGET /logs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-07-08 22:51:43,456 | INFO | 127.0.0.1 - - [08/Jul/2026 22:51:43] "GET /logs?__debugger__=yes&cmd=resource&f=console.png&s=cjQfou6xOzd9lakj8sG6 HTTP/1.1" 200 -
+2026-07-08 22:52:55,058 | INFO |  * Detected change in 'C:\\Users\\LENOVO\\desktop\\DevOps-Deployment-Platform\\Backend\\monitoring.py', reloading
+2026-07-08 22:52:55,116 | INFO |  * Restarting with stat
+2026-07-08 22:52:55,457 | WARNING |  * Debugger is active!
+2026-07-08 22:52:55,461 | INFO |  * Debugger PIN: 589-604-019
+2026-07-08 22:53:36,895 | INFO |  * Detected change in 'C:\\Users\\LENOVO\\desktop\\DevOps-Deployment-Platform\\Backend\\routes.py', reloading
+2026-07-08 22:53:36,953 | INFO |  * Restarting with stat
+2026-07-08 22:53:37,298 | WARNING |  * Debugger is active!
+2026-07-08 22:53:37,301 | INFO |  * Debugger PIN: 589-604-019
+2026-07-08 22:54:55,097 | INFO |  * Detected change in 'C:\\Users\\LENOVO\\desktop\\DevOps-Deployment-Platform\\Backend\\system_service.py', reloading
+2026-07-08 22:54:55,163 | INFO |  * Restarting with stat
+2026-07-08 22:54:55,528 | WARNING |  * Debugger is active!
+2026-07-08 22:54:55,532 | INFO |  * Debugger PIN: 589-604-019
