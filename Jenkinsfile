@@ -4,7 +4,7 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Repository Ready') {
 
             steps {
 
@@ -14,11 +14,21 @@ pipeline {
 
         }
 
+        stage('Check Docker') {
+
+            steps {
+
+                sh 'docker --version'
+
+            }
+
+        }
+
         stage('Build Docker Image') {
 
             steps {
 
-                bat 'docker build -t devops-control-center Backend'
+                sh 'docker build -t devops-control-center Backend'
 
             }
 
@@ -28,9 +38,9 @@ pipeline {
 
             steps {
 
-                bat 'docker stop devops-dashboard || exit 0'
+                sh 'docker stop devops-dashboard || true'
 
-                bat 'docker rm devops-dashboard || exit 0'
+                sh 'docker rm devops-dashboard || true'
 
             }
 
@@ -40,7 +50,7 @@ pipeline {
 
             steps {
 
-                bat 'docker run -d -p 5000:5000 --name devops-dashboard devops-control-center'
+                sh 'docker run -d -p 5000:5000 --name devops-dashboard devops-control-center'
 
             }
 
