@@ -1,5 +1,5 @@
-from logger import logger
-from history import save_deployment
+from services.logger import logger
+from services.history import save_deployment
 
 
 def deploy_application():

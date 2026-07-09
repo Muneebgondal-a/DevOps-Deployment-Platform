@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Docker Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🚀 DevOps</h2>
+
+<a href="/">Dashboard</a>
+
+<a href="/status">Status</a>
+
+<a href="/deploy">Deploy</a>
+
+<a href="/logs">Logs</a>
+
+<a href="/docker">Docker</a>
+
+</div>
+
+<div class="main">
+
+<h1>Docker Dashboard</h1>
+
+<br>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Installed</h3>
+
+<h2>{{ docker.installed }}</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Running</h3>
+
+<h2>{{ docker.running }}</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Docker Version</h3>
+
+<p>{{ docker.version }}</p>
+
+</div>
+
+<div class="card">
+
+<h3>Total Images</h3>
+
+<h2>{{ docker.images|length }}</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Total Containers</h3>
+
+<h2>{{ docker.containers|length }}</h2>
+
+</div>
+
+</div>
+
+<br><br>
+
+<h2>Docker Images</h2>
+
+<table border="1" cellpadding="10">
+
+<tr>
+
+<th>Repository</th>
+
+<th>Tag</th>
+
+<th>Size</th>
+
+</tr>
+
+{% for image in docker.images %}
+
+<tr>
+
+<td>{{ image.repository }}</td>
+
+<td>{{ image.tag }}</td>
+
+<td>{{ image.size }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br><br>
+
+<h2>Docker Containers</h2>
+
+<table border="1" cellpadding="10">
+
+<tr>
+
+<th>Name</th>
+
+<th>Status</th>
+
+<th>Image</th>
+
+</tr>
+
+{% for container in docker.containers %}
+
+<tr>
+
+<td>{{ container.name }}</td>
+
+<td>{{ container.status }}</td>
+
+<td>{{ container.image }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+
+</html>
