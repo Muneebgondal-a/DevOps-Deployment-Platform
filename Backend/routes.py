@@ -1,5 +1,10 @@
 from flask import render_template, redirect, request, url_for
-from flask_login import login_user, logout_user, login_required, current_user
+from flask_login import (
+    login_user,
+    logout_user,
+    login_required,
+    current_user
+)
 
 import config
 
@@ -8,6 +13,7 @@ from auth import User, validate_user
 from services.monitoring import get_system_information
 from services.deployment import deploy_application
 from services.logger import read_logs
+
 from services.git_service import (
     get_latest_commit,
     get_current_branch,
@@ -24,9 +30,9 @@ from services.docker_service import (
 
 def register_routes(app):
 
-    # ==========================================
+    # =====================================================
     # LOGIN
-    # ==========================================
+    # =====================================================
 
     @app.route("/login", methods=["GET", "POST"])
     def login():
@@ -54,9 +60,10 @@ def register_routes(app):
 
         return render_template("login.html")
 
-    # ==========================================
+
+    # =====================================================
     # LOGOUT
-    # ==========================================
+    # =====================================================
 
     @app.route("/logout")
     @login_required
@@ -66,40 +73,48 @@ def register_routes(app):
 
         return redirect(url_for("login"))
 
-       # ==========================================
-    # HOME
-    # ==========================================
+
+    # =====================================================
+    # HOME DASHBOARD
+    # =====================================================
 
     @app.route("/")
     @login_required
     def home():
 
         system = get_system_information()
+        docker_info = get_docker_information()
 
         return render_template(
             "index.html",
-            hostname=system["hostname"],
-            current_time=system["time"],
-            branch=get_current_branch(),
-            commit=get_latest_commit(),
+
+            # User Information
             username=current_user.id,
 
-            # Live Monitoring
+            # Git Information
+            branch=get_current_branch(),
+            commit=get_latest_commit(),
+
+            # System Information
+            hostname=system["hostname"],
+            current_time=system["time"],
             cpu=system["cpu"],
             memory=system["memory"],
             disk=system["disk"],
-
-            # Extra Information
             ip=system["ip"],
             os=system["os"],
             release=system["release"],
             uptime=system["uptime"],
-            processes=system["processes"]
+            processes=system["processes"],
+
+            # Docker Information
+            docker=docker_info
         )
 
-    # ==========================================
-    # STATUS
-    # ==========================================
+
+    # =====================================================
+    # SYSTEM STATUS
+    # =====================================================
 
     @app.route("/status")
     @login_required
@@ -109,24 +124,30 @@ def register_routes(app):
 
         return render_template(
             "status.html",
+
             cpu=system["cpu"],
             memory=system["memory"],
             disk=system["disk"],
+
             hostname=system["hostname"],
             os=system["os"],
             release=system["release"],
             ip=system["ip"],
+
             current_time=system["time"],
+
             cores=system["cores"],
             sent=system["sent"],
             received=system["received"],
+
             uptime=system["uptime"],
             processes=system["processes"],
         )
 
-    # ==========================================
-    # DEPLOY
-    # ==========================================
+
+    # =====================================================
+    # APPLICATION DEPLOYMENT
+    # =====================================================
 
     @app.route("/deploy")
     @login_required
@@ -136,44 +157,51 @@ def register_routes(app):
 
         return render_template(
             "deploy.html",
+
             message=message,
+
             server=config.SERVER_NAME,
             ip=config.SERVER_IP,
             env=config.ENVIRONMENT,
             version=config.APP_VERSION,
         )
 
-    # ==========================================
-    # LOGS
-    # ==========================================
+
+    # =====================================================
+    # APPLICATION LOGS
+    # =====================================================
 
     @app.route("/logs")
     @login_required
     def logs():
 
+        application_logs = read_logs()
+
         return render_template(
             "log.html",
-            logs=read_logs(),
+            logs=application_logs
         )
 
-    # ==========================================
+
+    # =====================================================
     # DOCKER DASHBOARD
-    # ==========================================
+    # =====================================================
 
     @app.route("/docker")
     @login_required
-    def docker():
+    def docker_dashboard():
 
-        docker = get_docker_information()
+        docker_info = get_docker_information()
 
         return render_template(
             "docker.html",
-            docker=docker,
+            docker=docker_info
         )
 
-    # ==========================================
+
+    # =====================================================
     # START CONTAINER
-    # ==========================================
+    # =====================================================
 
     @app.route("/docker/start/<name>")
     @login_required
@@ -181,11 +209,12 @@ def register_routes(app):
 
         start_container(name)
 
-        return redirect("/docker")
+        return redirect(url_for("docker_dashboard"))
 
-    # ==========================================
+
+    # =====================================================
     # STOP CONTAINER
-    # ==========================================
+    # =====================================================
 
     @app.route("/docker/stop/<name>")
     @login_required
@@ -193,11 +222,12 @@ def register_routes(app):
 
         stop_container(name)
 
-        return redirect("/docker")
+        return redirect(url_for("docker_dashboard"))
 
-    # ==========================================
+
+    # =====================================================
     # RESTART CONTAINER
-    # ==========================================
+    # =====================================================
 
     @app.route("/docker/restart/<name>")
     @login_required
@@ -205,11 +235,12 @@ def register_routes(app):
 
         restart_container(name)
 
-        return redirect("/docker")
+        return redirect(url_for("docker_dashboard"))
 
-    # ==========================================
+
+    # =====================================================
     # REMOVE CONTAINER
-    # ==========================================
+    # =====================================================
 
     @app.route("/docker/remove/<name>")
     @login_required
@@ -217,11 +248,12 @@ def register_routes(app):
 
         remove_container(name)
 
-        return redirect("/docker")
+        return redirect(url_for("docker_dashboard"))
 
-    # ==========================================
-    # HEALTH CHECK
-    # ==========================================
+
+    # =====================================================
+    # HEALTH CHECK API
+    # =====================================================
 
     @app.route("/health")
     def health():
