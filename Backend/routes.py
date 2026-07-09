@@ -1,15 +1,21 @@
 from flask import render_template
 
 import config
-from monitoring import get_system_information
-from deployment import deploy_application
-from logger import read_logs
-from git_service import get_latest_commit, get_current_branch
+
+from services.monitoring import get_system_information
+from services.deployment import deploy_application
+from services.logger import read_logs
+from services.git_service import (
+    get_latest_commit,
+    get_current_branch,
+)
 
 
 def register_routes(app):
 
-    # ================= HOME =================
+    # ===========================
+    # HOME PAGE
+    # ===========================
 
     @app.route("/")
     def home():
@@ -18,13 +24,15 @@ def register_routes(app):
 
         return render_template(
             "index.html",
+            hostname=system["hostname"],
+            current_time=system["time"],
             branch=get_current_branch(),
             commit=get_latest_commit(),
-            hostname=system["hostname"],
-            current_time=system["time"]
         )
 
-    # ================= DEPLOY =================
+    # ===========================
+    # DEPLOYMENT
+    # ===========================
 
     @app.route("/deploy")
     def deploy():
@@ -37,10 +45,12 @@ def register_routes(app):
             server=config.SERVER_NAME,
             ip=config.SERVER_IP,
             env=config.ENVIRONMENT,
-            version=config.APP_VERSION
+            version=config.APP_VERSION,
         )
 
-    # ================= STATUS =================
+    # ===========================
+    # SERVER STATUS
+    # ===========================
 
     @app.route("/status")
     def status():
@@ -55,10 +65,12 @@ def register_routes(app):
             hostname=system["hostname"],
             os=system["os"],
             release=system["release"],
-            current_time=system["time"]
+            current_time=system["time"],
         )
 
-    # ================= LOGS =================
+    # ===========================
+    # LOGS
+    # ===========================
 
     @app.route("/logs")
     def logs():
@@ -66,6 +78,6 @@ def register_routes(app):
         log_data = read_logs()
 
         return render_template(
-            "logs.html",
-            logs=log_data
+            "log.html",
+            logs=log_data,
         )
