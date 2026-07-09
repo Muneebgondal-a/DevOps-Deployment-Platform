@@ -66,7 +66,7 @@ def register_routes(app):
 
         return redirect(url_for("login"))
 
-    # ==========================================
+       # ==========================================
     # HOME
     # ==========================================
 
@@ -83,6 +83,18 @@ def register_routes(app):
             branch=get_current_branch(),
             commit=get_latest_commit(),
             username=current_user.id,
+
+            # Live Monitoring
+            cpu=system["cpu"],
+            memory=system["memory"],
+            disk=system["disk"],
+
+            # Extra Information
+            ip=system["ip"],
+            os=system["os"],
+            release=system["release"],
+            uptime=system["uptime"],
+            processes=system["processes"]
         )
 
     # ==========================================

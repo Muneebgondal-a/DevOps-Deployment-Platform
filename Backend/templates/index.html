@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -7,6 +6,8 @@
     <title>DevOps Control Center</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <meta http-equiv="refresh" content="5">
 
 </head>
 
@@ -17,17 +18,11 @@
         <h2>🚀 DevOps</h2>
 
         <a href="/">🏠 Dashboard</a>
-
         <a href="/status">🖥 Server Status</a>
-
         <a href="/deploy">🚀 Deploy</a>
-
         <a href="/logs">📄 Logs</a>
-
         <a href="/docker">🐳 Docker</a>
-
         <a href="/health" target="_blank">❤️ Health API</a>
-
         <a href="/logout">🚪 Logout</a>
 
     </div>
@@ -38,102 +33,100 @@
 
         <p>Welcome <b>{{ username }}</b></p>
 
-        <br>
+        <hr>
 
         <div class="cards">
 
             <div class="card">
-
                 <h3>🖥 Hostname</h3>
-
-                <p>{{ hostname }}</p>
-
+                <h2>{{ hostname }}</h2>
             </div>
 
             <div class="card">
-
                 <h3>🕒 Current Time</h3>
-
-                <p>{{ current_time }}</p>
-
+                <h2>{{ current_time }}</h2>
             </div>
 
             <div class="card">
-
                 <h3>🌿 Git Branch</h3>
-
-                <p>{{ branch }}</p>
-
+                <h2>{{ branch }}</h2>
             </div>
 
             <div class="card">
-
                 <h3>📌 Latest Commit</h3>
+                <h2>{{ commit }}</h2>
+            </div>
 
-                <p>{{ commit }}</p>
+            <div class="card">
+                <h3>🖥 CPU Usage</h3>
+
+                <progress value="{{ cpu }}" max="100"></progress>
+
+                <h2>{{ cpu }}%</h2>
 
             </div>
 
             <div class="card">
+                <h3>🧠 Memory Usage</h3>
 
-                <h3>🐳 Docker</h3>
+                <progress value="{{ memory }}" max="100"></progress>
 
-                <p>Manage Docker Containers</p>
-
-                <a href="/docker">
-                    <button class="btn">Open</button>
-                </a>
+                <h2>{{ memory }}%</h2>
 
             </div>
 
             <div class="card">
+                <h3>💾 Disk Usage</h3>
 
-                <h3>🖥 Server Status</h3>
+                <progress value="{{ disk }}" max="100"></progress>
 
-                <p>Monitor CPU, RAM and Disk</p>
-
-                <a href="/status">
-                    <button class="btn">Open</button>
-                </a>
+                <h2>{{ disk }}%</h2>
 
             </div>
 
             <div class="card">
-
-                <h3>🚀 Deploy</h3>
-
-                <p>Run Deployment</p>
-
-                <a href="/deploy">
-                    <button class="btn">Open</button>
-                </a>
-
+                <h3>🌐 Server IP</h3>
+                <h2>{{ ip }}</h2>
             </div>
 
             <div class="card">
+                <h3>⚙ Operating System</h3>
+                <h2>{{ os }}</h2>
+            </div>
 
-                <h3>❤️ Health Check</h3>
+            <div class="card">
+                <h3>🖥 OS Version</h3>
+                <h2>{{ release }}</h2>
+            </div>
 
-                <p>Verify Application Status</p>
+            <div class="card">
+                <h3>⏱ Uptime</h3>
+                <h2>{{ uptime }}</h2>
+            </div>
 
-                <a href="/health" target="_blank">
-                    <button class="btn">Check</button>
-                </a>
-
+            <div class="card">
+                <h3>⚙ Running Processes</h3>
+                <h2>{{ processes }}</h2>
             </div>
 
         </div>
 
+        <br>
+
+        <h2>⚡ Quick Actions</h2>
+
+        <button class="btn" onclick="location.href='/status'">Server Status</button>
+
+        <button class="btn" onclick="location.href='/docker'">Docker</button>
+
+        <button class="btn" onclick="location.href='/deploy'">Deploy</button>
+
+        <button class="btn" onclick="location.href='/logs'">Logs</button>
+
+        <button class="btn" onclick="window.open('/health')">Health API</button>
+
     </div>
-<script>
 
-setTimeout(function(){
-
-    location.reload();
-
-},5000);
-
-</script>
 </body>
 
 </html>
